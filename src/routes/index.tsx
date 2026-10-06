@@ -313,7 +313,7 @@ function ChapterHead({ cat, n, align = "left", className = "", overlap = false }
     <div className={`relative z-10 flex flex-col gap-3 ${align === "right" ? "md:items-end md:text-right" : ""} ${className}`}>
       <p className="eyebrow text-accent">{String(n + 1).padStart(2, "0")} — {cat.meta}</p>
       <h3 className={`giant !text-[clamp(3.5rem,10vw,10rem)] ${overlap ? "md:-ml-32" : ""}`}>{cat.title}</h3>
-      <p className="text-sm text-muted-foreground">Featuring work for {cat.brands.join(", ")}</p>
+      <p className="mt-4 text-sm text-muted-foreground">Featuring work for {cat.brands.join(", ")}</p>
     </div>
   );
 }
