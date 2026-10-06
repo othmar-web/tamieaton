@@ -319,7 +319,7 @@ function ChapterHead({ cat, n, align = "left" }: { cat: Cat; n: number; align?: 
 }
 
 function Chapter({ cat, n, onOpen }: { cat: Cat; n: number; onOpen: (v: Video) => void }) {
-  const v = cat.videos as readonly Video[];
+  const v = cat.videos as unknown as [Video, ...Video[]];
   const idx = (i: number) => `${n + 1}.${i + 1}`;
   const layout = n % 3;
 
