@@ -308,11 +308,11 @@ function Index() {
 
 type Cat = (typeof categories)[number];
 
-function ChapterHead({ cat, n, align = "left", className = "" }: { cat: Cat; n: number; align?: "left" | "right"; className?: string }) {
+function ChapterHead({ cat, n, align = "left", className = "", overlap = false }: { cat: Cat; n: number; align?: "left" | "right"; className?: string; overlap?: boolean }) {
   return (
     <div className={`relative z-10 flex flex-col gap-3 ${align === "right" ? "md:items-end md:text-right" : ""} ${className}`}>
       <p className="eyebrow text-accent">{String(n + 1).padStart(2, "0")} — {cat.meta}</p>
-      <h3 className="giant !text-[clamp(3.5rem,10vw,10rem)]">{cat.title}</h3>
+      <h3 className={`giant !text-[clamp(3.5rem,10vw,10rem)] ${overlap ? "md:-ml-32" : ""}`}>{cat.title}</h3>
       <p className="text-sm text-muted-foreground">Featuring work for {cat.brands.join(", ")}</p>
     </div>
   );
@@ -331,7 +331,7 @@ function Chapter({ cat, n, onOpen }: { cat: Cat; n: number; onOpen: (v: Video) =
         <div className="grid gap-6 md:grid-cols-12 md:gap-8">
           <VideoTile video={v[0]} index={idx(0)} onOpen={onOpen} aspect={feat} className="order-2 md:order-1 md:col-span-6" />
           <div className="order-1 flex flex-col justify-between gap-8 md:order-2 md:col-span-6">
-            <ChapterHead cat={cat} n={n} className="md:-ml-32 md:pt-6" />
+            <ChapterHead cat={cat} n={n} className="md:pt-6" overlap />
             <div className={`grid gap-4 md:gap-5 ${rest.length > 2 ? "grid-cols-3" : "grid-cols-2"}`}>
               {rest.map((x, i) => (
                 <VideoTile key={x.preview} video={x} index={idx(i + 1)} onOpen={onOpen} className={i === 1 ? "md:-mt-10" : ""} />
