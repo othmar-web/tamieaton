@@ -50,7 +50,7 @@ export function VideoTile({ video, index, onOpen, className = "", aspect = "aspe
       </button>
       <figcaption className="mt-3 flex items-baseline gap-3 text-muted-foreground">
         {index && <span className="eyebrow text-accent">{index}</span>}
-        <span className="text-sm">{video.label}</span>
+        <span className="text-xs md:text-sm">{video.label}</span>
       </figcaption>
     </figure>
   );

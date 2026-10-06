@@ -150,10 +150,10 @@ function Index() {
 
       {/* ABOUT */}
       <section id="about" className="mx-auto grid max-w-[1440px] scroll-mt-16 gap-12 px-5 py-24 md:grid-cols-12 md:px-10 md:py-36">
-        <div className="md:col-span-5">
+        <div className="md:col-span-6">
           <img src={aboutImage} alt="Portrait of Tami Eaton at her desk" loading="lazy" className="aspect-[4/5] w-full object-cover" />
         </div>
-        <div className="flex flex-col justify-center md:col-span-6 md:col-start-7">
+        <div className="flex flex-col justify-center md:col-span-5 md:col-start-8">
           <p className="eyebrow text-accent">About</p>
           <h2 className="font-display mt-6 text-[clamp(2.5rem,5vw,4.75rem)] leading-[0.95]">
             Warm. Relatable.<br />Authentic. <em>Confident.</em>
@@ -175,9 +175,9 @@ function Index() {
       <section aria-label="Trusted by brands" className="border-y border-border py-8">
         <p className="eyebrow mb-6 text-center text-muted-foreground">Trusted by 1,000+ brands, including</p>
         <div className="overflow-hidden [mask-image:linear-gradient(90deg,transparent,black_12%,black_88%,transparent)]">
-          <div className="marquee flex w-max gap-14">
+          <div className="marquee flex w-max gap-12 md:gap-16">
             {[...BRANDS, ...BRANDS].map((b, i) => (
-              <span key={i} className="font-display whitespace-nowrap text-xl text-taupe md:text-2xl">{b}</span>
+              <span key={i} className="font-display whitespace-nowrap text-base tracking-wide text-taupe md:text-lg">{b}</span>
             ))}
           </div>
         </div>
@@ -248,10 +248,10 @@ function Index() {
         <div className="mx-auto max-w-[1440px] px-5 md:px-10">
           <p className="eyebrow text-accent">Testimonials</p>
           <figure className="mt-10 grid gap-8 md:grid-cols-12">
-            <span className="font-display text-[10rem] leading-[0.6] text-accent md:col-span-1" aria-hidden>“</span>
+            <span className="font-display text-[12rem] leading-[0.6] md:text-[16rem] text-accent md:col-span-1" aria-hidden>“</span>
             <div className="md:col-span-10">
-              <blockquote className="font-display text-[clamp(1.6rem,3.2vw,2.9rem)] leading-[1.15]">{TESTIMONIALS[0].q}</blockquote>
-              <figcaption className="eyebrow mt-8 text-muted-foreground">— {TESTIMONIALS[0].a}</figcaption>
+              <blockquote className="font-display text-[clamp(1.75rem,3.6vw,3.25rem)] leading-[1.12]">{TESTIMONIALS[0].q}</blockquote>
+              <figcaption className="mt-10 flex items-center gap-4"><span className="h-px w-12 bg-accent" /><span className="eyebrow text-foreground">{TESTIMONIALS[0].a}</span><span className="eyebrow text-muted-foreground">Client</span></figcaption>
             </div>
           </figure>
           <div className="mt-20 grid gap-px bg-border md:grid-cols-2">
@@ -308,54 +308,59 @@ function Index() {
 
 type Cat = (typeof categories)[number];
 
-function ChapterHead({ cat, n, align = "left" }: { cat: Cat; n: number; align?: "left" | "right" }) {
+function ChapterHead({ cat, n, align = "left", className = "", overlap = false }: { cat: Cat; n: number; align?: "left" | "right"; className?: string; overlap?: boolean }) {
   return (
-    <div className={`flex flex-col gap-4 ${align === "right" ? "md:items-end md:text-right" : ""}`}>
+    <div className={`relative z-10 flex flex-col gap-3 ${align === "right" ? "md:items-end md:text-right" : ""} ${className}`}>
       <p className="eyebrow text-accent">{String(n + 1).padStart(2, "0")} — {cat.meta}</p>
-      <h3 className="giant">{cat.title}</h3>
-      <p className="text-sm text-muted-foreground">Featuring work for {cat.brands.join(", ")}</p>
+      <h3 className={`giant !text-[clamp(3.5rem,10vw,10rem)] ${overlap ? "md:-ml-32" : ""}`}>{cat.title}</h3>
+      <p className="mt-4 text-sm text-muted-foreground">Featuring work for {cat.brands.join(", ")}</p>
     </div>
   );
 }
 
 function Chapter({ cat, n, onOpen }: { cat: Cat; n: number; onOpen: (v: Video) => void }) {
   const v = cat.videos as unknown as [Video, ...Video[]];
+  const rest = v.slice(1, 4);
   const idx = (i: number) => `${n + 1}.${i + 1}`;
   const layout = n % 3;
+  const feat = "aspect-[4/5]";
 
   return (
-    <article id={cat.id} className="mx-auto max-w-[1440px] scroll-mt-20 overflow-hidden px-5 py-20 md:px-10 md:py-28">
+    <article id={cat.id} className="mx-auto max-w-[1440px] scroll-mt-20 overflow-hidden px-5 py-16 md:px-10 md:py-24">
       {layout === 0 && (
-        <div className="grid gap-8 md:grid-cols-12">
-          <div className="md:col-span-12"><ChapterHead cat={cat} n={n} /></div>
-          <VideoTile video={v[0]} index={idx(0)} onOpen={onOpen} className="md:col-span-5" />
-          <div className="grid grid-cols-2 gap-4 md:col-span-6 md:col-start-7 md:mt-40 md:gap-6">
-            {v.slice(1).map((x, i) => (
-              <VideoTile key={x.preview} video={x} index={idx(i + 1)} onOpen={onOpen} className={i % 2 ? "md:mt-24" : ""} />
-            ))}
+        <div className="grid gap-6 md:grid-cols-12 md:gap-8">
+          <VideoTile video={v[0]} index={idx(0)} onOpen={onOpen} aspect={feat} className="order-2 md:order-1 md:col-span-6" />
+          <div className="order-1 flex flex-col justify-between gap-8 md:order-2 md:col-span-6">
+            <ChapterHead cat={cat} n={n} className="md:pt-6" overlap />
+            <div className={`grid gap-4 md:gap-5 ${rest.length > 2 ? "grid-cols-3" : "grid-cols-2"}`}>
+              {rest.map((x, i) => (
+                <VideoTile key={x.preview} video={x} index={idx(i + 1)} onOpen={onOpen} className={i === 1 ? "md:-mt-10" : ""} />
+              ))}
+            </div>
           </div>
         </div>
       )}
       {layout === 1 && (
-        <div className="grid gap-8 md:grid-cols-12">
-          <div className="order-2 grid grid-cols-2 gap-4 md:order-1 md:col-span-7 md:grid-cols-3 md:gap-6">
-            {v.slice(1).map((x, i) => (
-              <VideoTile key={x.preview} video={x} index={idx(i + 1)} onOpen={onOpen} className={i === 1 ? "md:mt-20" : ""} />
-            ))}
+        <div className="grid gap-6 md:grid-cols-12 md:gap-8">
+          <div className="flex flex-col justify-between gap-8 md:col-span-6">
+            <ChapterHead cat={cat} n={n} className="md:pt-6" />
+            <div className={`grid gap-4 md:gap-5 ${rest.length > 2 ? "grid-cols-3" : "grid-cols-2"}`}>
+              {rest.map((x, i) => (
+                <VideoTile key={x.preview} video={x} index={idx(i + 1)} onOpen={onOpen} className={i === 1 ? "md:-mt-10" : ""} />
+              ))}
+            </div>
           </div>
-          <div className="order-1 flex flex-col gap-8 md:order-2 md:col-span-5">
-            <ChapterHead cat={cat} n={n} align="right" />
-            <VideoTile video={v[0]} index={idx(0)} onOpen={onOpen} className="md:ml-auto md:w-4/5" />
-          </div>
+          <VideoTile video={v[0]} index={idx(0)} onOpen={onOpen} aspect={feat} className="md:col-span-6" />
         </div>
       )}
       {layout === 2 && (
-        <div>
-          <ChapterHead cat={cat} n={n} />
-          <div className="mt-10 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-4 md:grid md:grid-cols-4 md:gap-6 md:overflow-visible">
-            {v.map((x, i) => (
-              <VideoTile key={x.preview} video={x} index={idx(i)} onOpen={onOpen}
-                className={`w-[68vw] shrink-0 snap-start md:w-auto ${i % 2 ? "md:translate-y-16" : ""}`} />
+        <div className="relative">
+          <ChapterHead cat={cat} n={n} align="right" />
+          <div className="mt-8 grid grid-cols-2 gap-4 md:-mt-16 md:grid-cols-12 md:gap-6">
+            <VideoTile video={v[0]} index={idx(0)} onOpen={onOpen} aspect={feat} className="col-span-2 md:col-span-5" />
+            {rest.map((x, i) => (
+              <VideoTile key={x.preview} video={x} index={idx(i + 1)} onOpen={onOpen}
+                className={`md:col-span-${rest.length > 2 ? "2" : "3"} md:self-end ${i === 1 ? "md:mb-16" : ""}`} />
             ))}
           </div>
         </div>
