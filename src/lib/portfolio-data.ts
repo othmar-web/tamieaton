@@ -150,6 +150,12 @@ export const categories=[
     "preview": "https://contenttami.com/ugcportfolio/_assets/video/01871a23a7bddafaec46bf9f5de7819e.mp4",
     "full": "https://contenttami.com/ugcportfolio/_assets/video/784390c0f4620316dce951cde5e19b38.mp4",
     "label": "Sleep voiceover"
+   },
+   {
+    "poster": "https://contenttami.com/ugcportfolio/_assets/video/2edca7f341e6a14e0efed02013c7fd93.jpg",
+    "preview": "https://contenttami.com/ugcportfolio/_assets/video/1011074c36fb23db56248b61fce99e63.mp4",
+    "full": "https://contenttami.com/ugcportfolio/_assets/video/202fc74323e7a69ebb407b74b5b34f63.mp4",
+    "label": "Product talking head"
    }
   ]
  },
@@ -187,7 +193,7 @@ export const categories=[
     "poster": "https://contenttami.com/ugcportfolio/_assets/video/727bdd6d0aeecd2321505fa94af25f99.jpg",
     "preview": "https://contenttami.com/ugcportfolio/_assets/video/8d98760ac5f15679e15c0804c012a803.mp4",
     "full": "https://contenttami.com/ugcportfolio/_assets/video/4a31cca939270713784af5ff9a6aacbe.mp4",
-    "label": "Close-up beauty detail"
+    "label": "Close-up detail"
    }
   ]
  },
@@ -212,18 +218,6 @@ export const categories=[
     "preview": "https://contenttami.com/ugcportfolio/_assets/video/ecfbe4f91c6c166f8e697efab71f6aee.mp4",
     "full": "https://contenttami.com/ugcportfolio/_assets/video/9019544d288e378b98d8df9e43b5f9dc.mp4",
     "label": "Dog treats & toys voiceover"
-   },
-   {
-    "poster": "https://contenttami.com/ugcportfolio/_assets/video/2edca7f341e6a14e0efed02013c7fd93.jpg",
-    "preview": "https://contenttami.com/ugcportfolio/_assets/video/1011074c36fb23db56248b61fce99e63.mp4",
-    "full": "https://contenttami.com/ugcportfolio/_assets/video/202fc74323e7a69ebb407b74b5b34f63.mp4",
-    "label": "Talking head"
-   },
-   {
-    "poster": "https://contenttami.com/ugcportfolio/_assets/video/97fb21dc0a1706de637722cbc93fd928.jpg",
-    "preview": "https://contenttami.com/ugcportfolio/_assets/video/dd102ab57e5ff446395ff67592ce47fd.mp4",
-    "full": "https://contenttami.com/ugcportfolio/_assets/video/1b2963e33e234c514b84a80210d61eef.mp4",
-    "label": "Talking head"
    }
   ]
  }
