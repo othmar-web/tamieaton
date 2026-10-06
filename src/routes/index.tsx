@@ -54,7 +54,7 @@ const SERVICES = [
   ["Product Photography", "Editorial lifestyle and detail imagery of your product in real use."],
 ] as const;
 
-const TESTIMONIALS = [
+const TESTIMONIALS: [{ q: string; a: string }, ...{ q: string; a: string }[]] = [
   {
     q: "Working with Tami was an outstanding experience for our brand. Her storytelling brought our product to life, engaging and resonating with our audience in a powerful way. The quality of her work was top-notch, delivered with a high level of professionalism and creativity that matched our brand's identity perfectly. In short, she exceeded our expectations in every aspect — creativity, timeliness, and communication.",
     a: "Le Skyebleu",
